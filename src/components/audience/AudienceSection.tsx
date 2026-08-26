@@ -84,7 +84,7 @@ export default function AudienceSection() {
               </h3>
               <p className="mt-2 text-[14px] leading-relaxed text-text-secondary">
                 Self-host one shared instance for the whole team via Docker.
-                An API key makes sharing it safe — every developer's agent
+                An API key makes sharing it safe — every developer&apos;s agent
                 still goes through the same approval gate before anything
                 reaches GitHub.
               </p>

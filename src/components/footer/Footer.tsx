@@ -1,9 +1,10 @@
+import Link from "next/link";
+
 const COLUMNS: { title: string; links: { label: string; href: string }[] }[] = [
   {
     title: "Product",
     links: [
-      { label: "How it works", href: "#workflow" },
-      { label: "Integrations", href: "#integrations" },
+      { label: "How it works", href: "/#workflow" },
       { label: "Security", href: "/security" },
       { label: "Installation", href: "/installation" },
     ],
@@ -11,24 +12,19 @@ const COLUMNS: { title: string; links: { label: string; href: string }[] }[] = [
   {
     title: "Developers",
     links: [
-      { label: "Documentation", href: "/docs" },
-      { label: "Installation guide", href: "/docs/installation" },
       {
-        label: "Architecture",
-        href: "https://github.com/DEADSERPENT/resolvr/blob/main/docs/ARCHITECTURE.md",
+        label: "Documentation",
+        href: "https://github.com/DEADSERPENT/resolvr#readme",
       },
-      {
-        label: "MCP tools reference",
-        href: "https://github.com/DEADSERPENT/resolvr/blob/main/docs/TOOLS.md",
-      },
+      { label: "MCP", href: "/#integrations" },
+      { label: "GitHub", href: "https://github.com/DEADSERPENT/resolvr" },
     ],
   },
   {
     title: "Resources",
     links: [
-      { label: "GitHub", href: "https://github.com/DEADSERPENT/resolvr" },
       {
-        label: "Latest release",
+        label: "Releases",
         href: "https://github.com/DEADSERPENT/resolvr/releases/latest",
       },
       {
@@ -37,6 +33,10 @@ const COLUMNS: { title: string; links: { label: string; href: string }[] }[] = [
       },
     ],
   },
+  {
+    title: "Company",
+    links: [{ label: "GitHub", href: "https://github.com/DEADSERPENT/resolvr" }],
+  },
 ];
 
 export default function Footer() {
@@ -44,7 +44,7 @@ export default function Footer() {
     <footer className="relative w-full px-4 pb-10 pt-4 sm:px-6">
       <div className="mx-auto max-w-6xl">
         <div className="glass-strong rounded-3xl px-7 py-10 sm:px-10">
-          <div className="grid grid-cols-2 gap-10 sm:grid-cols-5">
+          <div className="grid grid-cols-2 gap-10 sm:grid-cols-6">
             <div className="col-span-2">
               <span className="font-display text-[15px] font-bold tracking-[0.16em] text-text-primary">
                 RESOLVR
@@ -61,16 +61,23 @@ export default function Footer() {
                   {col.title}
                 </h4>
                 <ul className="mt-3 flex flex-col gap-2.5">
-                  {col.links.map((link) => (
-                    <li key={link.label}>
-                      <a
-                        href={link.href}
-                        className="text-[13px] text-text-secondary transition-colors hover:text-text-primary"
-                      >
-                        {link.label}
-                      </a>
-                    </li>
-                  ))}
+                  {col.links.map((link) => {
+                    const className =
+                      "text-[13px] text-text-secondary transition-colors hover:text-text-primary";
+                    return (
+                      <li key={link.label}>
+                        {link.href.startsWith("/") ? (
+                          <Link href={link.href} className={className}>
+                            {link.label}
+                          </Link>
+                        ) : (
+                          <a href={link.href} className={className}>
+                            {link.label}
+                          </a>
+                        )}
+                      </li>
+                    );
+                  })}
                 </ul>
               </div>
             ))}

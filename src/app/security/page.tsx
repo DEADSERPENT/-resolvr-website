@@ -3,7 +3,7 @@ import SecuritySection from "@/components/security/SecuritySection";
 import FinalCta from "@/components/cta/FinalCta";
 
 export const metadata: Metadata = {
-  title: "Security — Resolvr",
+  title: "Security",
   description:
     "Resolvr's security model: local-first resolution, an explicit human approval gate, fail-closed authentication, and a controlled write path to GitHub.",
 };

@@ -29,7 +29,7 @@ export default function InstallationSection() {
         <SectionHeading
           eyebrow="Installation"
           title="Install once. Resolve anywhere."
-          sub="Resolvr ships as a native package for every major platform, plus a CLI and bundled MCP server."
+          sub="Resolvr is built as a native package for every major platform, plus a CLI and bundled MCP server. Native installers are on the way — build from source or self-host via Docker today."
           align="center"
         />
 
@@ -61,24 +61,24 @@ export default function InstallationSection() {
         <Reveal delay={0.2} className="mt-10 flex flex-col items-center gap-4">
           <div className="flex flex-wrap items-center justify-center gap-3.5">
             <a
-              href="https://github.com/DEADSERPENT/resolvr/releases/latest"
-              className="skeuo-btn inline-flex items-center rounded-2xl px-6 py-3.5 text-[14.5px] font-semibold"
+              href="https://github.com/DEADSERPENT/resolvr/tree/main/docker"
+              className="skeuo-btn inline-flex items-center gap-2 rounded-2xl px-6 py-3.5 text-[14.5px] font-semibold"
             >
-              Download for your platform
+              <Container size={16} />
+              Self-host via Docker
             </a>
             <a
-              href="/docs/installation"
+              href="/installation"
               className="glass inline-flex items-center rounded-2xl px-6 py-3.5 text-[14.5px] font-medium text-text-primary transition-colors hover:border-glass-border-strong"
             >
               Full installation guide
             </a>
           </div>
           <a
-            href="https://github.com/DEADSERPENT/resolvr/tree/main/docker"
-            className="flex items-center gap-1.5 font-mono text-[11.5px] text-text-tertiary transition-colors hover:text-accent-sage"
+            href="https://github.com/DEADSERPENT/resolvr/releases/latest"
+            className="font-mono text-[11.5px] text-text-tertiary transition-colors hover:text-accent-sage"
           >
-            <Container size={13} />
-            Prefer containers? Self-host via Docker.
+            View releases on GitHub
           </a>
         </Reveal>
       </div>

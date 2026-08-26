@@ -1,15 +1,17 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import GithubMark from "@/components/icons/GithubMark";
 
 const LINKS = [
-  { label: "Product", href: "#product" },
-  { label: "How it works", href: "#workflow" },
-  { label: "Developers", href: "#developers" },
-  { label: "Integrations", href: "#integrations" },
-  { label: "Security", href: "#security" },
+  { label: "Product", href: "/#product" },
+  { label: "How it works", href: "/#workflow" },
+  { label: "Developers", href: "/#developers" },
+  { label: "Integrations", href: "/#integrations" },
+  { label: "Security", href: "/security" },
+  { label: "Installation", href: "/installation" },
 ];
 
 export default function Navigation() {
@@ -50,7 +52,7 @@ export default function Navigation() {
             scrolled ? "mt-3 px-4 py-2.5 shadow-[0_10px_36px_-14px_rgba(37,31,24,0.24)]" : "mt-5 px-5 py-3.5"
           }`}
         >
-          <a href="#top" className="flex items-center gap-2 shrink-0">
+          <Link href="/#top" className="flex items-center gap-2 shrink-0">
             <span
               aria-hidden="true"
               className="clay flex h-7 w-7 items-center justify-center !rounded-lg"
@@ -60,17 +62,17 @@ export default function Navigation() {
             <span className="font-display text-[15px] font-bold tracking-[0.16em] text-text-primary">
               RESOLVR
             </span>
-          </a>
+          </Link>
 
           <ul className="hidden lg:flex items-center gap-1 font-mono text-[12.5px] tracking-tight text-text-secondary">
             {LINKS.map((link) => (
               <li key={link.href}>
-                <a
+                <Link
                   href={link.href}
                   className="rounded-lg px-3 py-2 transition-colors hover:text-text-primary hover:bg-black/[0.04]"
                 >
                   {link.label}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
@@ -85,7 +87,7 @@ export default function Navigation() {
             </a>
             <a
               href="https://github.com/DEADSERPENT/resolvr/releases/latest"
-              className="skeuo-btn inline-flex items-center rounded-xl px-4 py-2 text-[13px] font-semibold"
+              className="skeuo-btn hidden sm:inline-flex items-center rounded-xl px-4 py-2 text-[13px] font-semibold"
             >
               Get Resolvr
             </a>
@@ -108,14 +110,14 @@ export default function Navigation() {
             className="glass-strong mt-2 flex flex-col gap-1 rounded-2xl p-3 lg:hidden"
           >
             {LINKS.map((link) => (
-              <a
+              <Link
                 key={link.href}
                 href={link.href}
                 onClick={() => setMenuOpen(false)}
                 className="rounded-xl px-4 py-3 text-[14px] font-medium text-text-primary transition-colors hover:bg-black/[0.04]"
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
             <a
               href="https://github.com/DEADSERPENT/resolvr"
@@ -124,6 +126,13 @@ export default function Navigation() {
             >
               <GithubMark size={16} />
               GitHub
+            </a>
+            <a
+              href="https://github.com/DEADSERPENT/resolvr/releases/latest"
+              onClick={() => setMenuOpen(false)}
+              className="skeuo-btn mt-1 inline-flex items-center justify-center rounded-xl px-4 py-3 text-[14px] font-semibold"
+            >
+              Get Resolvr
             </a>
           </div>
         ) : null}
