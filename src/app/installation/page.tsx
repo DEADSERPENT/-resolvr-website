@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function InstallationPage() {
   return (
-    <main className="flex flex-1 flex-col pt-20">
+    <main id="main" className="flex flex-1 flex-col pt-20">
       <InstallationSection />
       <DeveloperTerminal />
       <FinalCta />

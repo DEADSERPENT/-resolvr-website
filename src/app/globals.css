@@ -16,18 +16,19 @@
   --glass-border: rgba(255, 255, 255, 0.85);
   --glass-border-strong: rgba(255, 255, 255, 0.95);
 
-  /* Accents */
-  --accent-coral: #e0512f;
+  /* Accents — darkened from initial picks to clear 4.5:1 text contrast
+     against the paper background (verified against WCAG 2.1 formula). */
+  --accent-coral: #b93d22;
   --accent-sage: #4c6f47;
-  --accent-sand: #c9973f;
+  --accent-sand: #7a5c1c;
   --success: #4c6f47;
   --warning: #b8860b;
   --error: #d1401f;
 
-  /* Text */
+  /* Text — alpha tuned so secondary/tertiary both clear 4.5:1 on bg-900. */
   --text-primary: #251f18;
-  --text-secondary: rgba(37, 31, 24, 0.62);
-  --text-tertiary: rgba(37, 31, 24, 0.42);
+  --text-secondary: rgba(37, 31, 24, 0.72);
+  --text-tertiary: rgba(37, 31, 24, 0.66);
 
   /* Neumorphic / claymorphic shadow pair (warm, light surface) */
   --neu-shadow-dark: rgba(170, 145, 105, 0.32);
@@ -87,6 +88,15 @@ body {
   color: #ffffff;
 }
 
+/* Visible keyboard focus on every interactive element. */
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--accent-coral);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
 /* ---------------------------------------------- */
 /* Atmosphere: warm gradient mesh + grain           */
 /* ---------------------------------------------- */
@@ -106,7 +116,7 @@ body {
   background:
     radial-gradient(
       42rem 30rem at 18% -6%,
-      rgba(224, 81, 47, 0.16),
+      rgba(185, 61, 34, 0.16),
       transparent 60%
     ),
     radial-gradient(
@@ -209,28 +219,30 @@ body {
 .skeuo-btn {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(155deg, #ff8b6c, var(--accent-coral) 45%, #c73f22);
+  /* Kept dark enough end-to-end that white label text clears 4.5:1
+     at every point along the gradient, not just the darkest stop. */
+  background: linear-gradient(155deg, #c2431f 0%, #a83a1c 50%, #8f2f16 100%);
   color: #ffffff;
   box-shadow:
-    0 14px 26px rgba(224, 81, 47, 0.4),
-    inset 0 1.5px 0 rgba(255, 255, 255, 0.55),
-    inset 0 -4px 8px rgba(120, 30, 10, 0.25);
+    0 14px 26px rgba(185, 61, 34, 0.4),
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.4),
+    inset 0 -4px 8px rgba(80, 20, 6, 0.3);
   transition: transform 0.15s var(--ease-clay), box-shadow 0.15s ease;
 }
 
 .skeuo-btn:hover {
   transform: translateY(-2px);
   box-shadow:
-    0 18px 30px rgba(224, 81, 47, 0.46),
-    inset 0 1.5px 0 rgba(255, 255, 255, 0.6),
-    inset 0 -4px 8px rgba(120, 30, 10, 0.25);
+    0 18px 30px rgba(185, 61, 34, 0.46),
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.45),
+    inset 0 -4px 8px rgba(80, 20, 6, 0.3);
 }
 
 .skeuo-btn:active {
   transform: translateY(1px);
   box-shadow:
-    0 6px 14px rgba(224, 81, 47, 0.35),
-    inset 0 3px 8px rgba(120, 30, 10, 0.35);
+    0 6px 14px rgba(185, 61, 34, 0.35),
+    inset 0 3px 8px rgba(80, 20, 6, 0.4);
 }
 
 .skeuo-btn::before {
@@ -250,8 +262,15 @@ body {
   );
   filter: blur(4px);
   transform: rotate(20deg) translateX(-40%);
-  animation: skeuo-sheen 3.2s linear infinite;
+  opacity: 0;
   pointer-events: none;
+}
+
+/* One-shot sheen on hover/focus, not a perpetual loop. */
+.skeuo-btn:hover::before,
+.skeuo-btn:focus-visible::before {
+  opacity: 1;
+  animation: skeuo-sheen 0.85s ease-out;
 }
 
 @keyframes skeuo-sheen {

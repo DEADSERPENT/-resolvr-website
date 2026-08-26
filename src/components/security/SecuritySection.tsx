@@ -6,10 +6,12 @@ import {
   ShieldCheck,
   UploadCloud,
   UserCheck,
-  HardDrive,
-  Lock,
-  GitBranch,
-  Ban,
+  SearchCheck,
+  KeyRound,
+  GitCommitHorizontal,
+  EyeOff,
+  WifiOff,
+  ArrowUpRight,
   type LucideIcon,
 } from "lucide-react";
 import Reveal from "@/components/shared/Reveal";
@@ -25,28 +27,33 @@ const PIPELINE = [
 const GUARANTEES: { title: string; desc: string; icon: LucideIcon }[] = [
   {
     title: "Human approval",
-    desc: "No commit or push happens before explicit sign-off on the resolution.",
+    desc: "No commit or push happens before your explicit sign-off on the resolution.",
     icon: UserCheck,
   },
   {
-    title: "Local-first",
-    desc: "Resolution work operates against your local workspace, not a remote sandbox.",
-    icon: HardDrive,
+    title: "Trust, but verify",
+    desc: "Resolvr re-checks branch, HEAD, and PR state against Git and GitHub before writing anything — it never trusts what the agent claims it changed.",
+    icon: SearchCheck,
   },
   {
-    title: "Fail-closed",
-    desc: "Production configuration does not silently bypass authentication.",
-    icon: Lock,
+    title: "Fail-closed by default",
+    desc: "A production instance refuses to start without an API key configured. There's no accidental open mode.",
+    icon: KeyRound,
   },
   {
-    title: "Controlled write path",
-    desc: "GitHub-changing operations run through a single, explicit approval-gated path.",
-    icon: GitBranch,
+    title: "One write path",
+    desc: "A single tool ever commits or pushes to GitHub — every other action is read-only.",
+    icon: GitCommitHorizontal,
   },
   {
-    title: "No automatic merge",
-    desc: "Resolvr does not silently merge pull requests on your behalf.",
-    icon: Ban,
+    title: "Secrets never logged",
+    desc: "Your GitHub token and API key are never echoed back in a response, log line, or commit message.",
+    icon: EyeOff,
+  },
+  {
+    title: "No webhooks, no polling",
+    desc: "There's no server-side event system. Your agent drives every interaction — Resolvr only acts when asked.",
+    icon: WifiOff,
   },
 ];
 
@@ -114,6 +121,16 @@ export default function SecuritySection() {
             </Reveal>
           ))}
         </div>
+
+        <Reveal delay={0.2} className="mt-8 flex justify-center">
+          <a
+            href="https://github.com/DEADSERPENT/resolvr/blob/main/docs/SECURITY.md"
+            className="inline-flex items-center gap-1.5 text-[13.5px] font-medium text-accent-sage transition-colors hover:text-accent-coral"
+          >
+            Read the full security documentation
+            <ArrowUpRight size={14} />
+          </a>
+        </Reveal>
       </div>
     </section>
   );

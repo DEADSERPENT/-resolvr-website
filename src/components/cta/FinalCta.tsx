@@ -16,7 +16,7 @@ export default function FinalCta() {
             </p>
             <div className="mt-9 flex flex-wrap items-center justify-center gap-3.5">
               <a
-                href="#install"
+                href="https://github.com/DEADSERPENT/resolvr/releases/latest"
                 className="skeuo-btn inline-flex items-center gap-2 rounded-2xl px-6 py-3.5 text-[14.5px] font-semibold"
               >
                 Get Resolvr

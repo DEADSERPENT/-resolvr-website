@@ -10,11 +10,10 @@ import {
 } from "framer-motion";
 import {
   GitPullRequest,
-  MessageSquareText,
-  Workflow,
   Bot,
+  Workflow,
   Wrench,
-  TestTube,
+  FlaskConical,
   UserCheck,
   GitCommitHorizontal,
   CheckCircle2,
@@ -27,19 +26,21 @@ type Node = {
   icon: LucideIcon;
 };
 
+// Mirrors Resolvr's actual documented workflow (README "How it works"):
+// GitHub PR Review -> Coding Agent -> Resolvr -> Local Fix -> Tests ->
+// Human Approval -> Commit & Push -> Review Resolved.
 const NODES: Node[] = [
-  { label: "GitHub PR", sublabel: "Pull request opened", icon: GitPullRequest },
-  { label: "Review Comment", sublabel: "Feedback left on diff", icon: MessageSquareText },
-  { label: "Resolvr", sublabel: "MCP + workspace context", icon: Workflow },
-  { label: "AI Agent", sublabel: "Claude / Copilot", icon: Bot },
-  { label: "Local Fix", sublabel: "Change applied in workspace", icon: Wrench },
-  { label: "Tests + CI", sublabel: "Validation runs", icon: TestTube },
-  { label: "Human Approval", sublabel: "Explicit sign-off required", icon: UserCheck },
-  { label: "Commit + Push", sublabel: "Write path executes", icon: GitCommitHorizontal },
-  { label: "Resolved", sublabel: "Thread closed, CI green", icon: CheckCircle2 },
+  { label: "GitHub PR Review", sublabel: "Copilot leaves comments", icon: GitPullRequest },
+  { label: "Coding Agent", sublabel: "VS Code, JetBrains, or Claude Code", icon: Bot },
+  { label: "Resolvr", sublabel: "MCP execution & approval gate", icon: Workflow },
+  { label: "Local Fix", sublabel: "Agent edits with its own tools", icon: Wrench },
+  { label: "Tests / CI", sublabel: "Agent runs its own test suite", icon: FlaskConical },
+  { label: "Human Approval", sublabel: "Explicit developer sign-off", icon: UserCheck },
+  { label: "Commit & Push", sublabel: "The only write path", icon: GitCommitHorizontal },
+  { label: "Review Resolved", sublabel: "Threads resolved on GitHub", icon: CheckCircle2 },
 ];
 
-const CYCLE_SECONDS = 9;
+const CYCLE_SECONDS = 8;
 
 export default function WorkflowDiagram() {
   const progress = useMotionValue(0);
@@ -53,11 +54,13 @@ export default function WorkflowDiagram() {
       progress.set(1);
       return;
     }
+    // Plays three passes to make the loop legible, then settles on
+    // "Review Resolved" rather than animating forever.
     const controls = animate(progress, [0, 1, 1], {
       duration: CYCLE_SECONDS,
       times: [0, 0.86, 1],
       ease: "linear",
-      repeat: Infinity,
+      repeat: 2,
     });
     return () => controls.stop();
   }, [progress]);
@@ -83,7 +86,7 @@ export default function WorkflowDiagram() {
           className="absolute left-[15px] -translate-x-1/2 h-2.5 w-2.5 rounded-full bg-accent-coral"
           style={{
             top: beaconTop,
-            boxShadow: "0 0 14px 4px rgba(224,81,47,0.4)",
+            boxShadow: "0 0 14px 4px rgba(185,61,34,0.4)",
           }}
         />
 
@@ -140,7 +143,7 @@ function WorkflowNodeRow({
             (v) =>
               `inset 0 1px 1px rgba(255,255,255,0.95), inset 0 -6px 12px rgba(170,145,105,0.3), 0 0 ${
                 v * 22
-              }px ${v * 4}px rgba(224,81,47,${v * 0.28})`
+              }px ${v * 4}px rgba(185,61,34,${v * 0.28})`
           ),
         }}
       >

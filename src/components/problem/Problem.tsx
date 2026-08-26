@@ -9,10 +9,12 @@ import {
   CornerDownLeft,
   CheckCheck,
   ArrowDown,
-  MessageSquareText,
-  Workflow,
+  GitPullRequest,
   Bot,
-  ShieldCheck,
+  Workflow,
+  FlaskConical,
+  UserCheck,
+  GitCommitHorizontal,
   CheckCircle2,
   type LucideIcon,
 } from "lucide-react";
@@ -26,25 +28,25 @@ type Step = { label: string; icon: IconComponent };
 const TRADITIONAL: Step[] = [
   { label: "GitHub", icon: GithubMark },
   { label: "Read comment", icon: MessageCircle },
-  { label: "Switch IDE", icon: ArrowLeftRight },
-  { label: "Find code", icon: Search },
-  { label: "Understand context", icon: Search },
-  { label: "Fix", icon: Wrench },
+  { label: "Switch to IDE", icon: ArrowLeftRight },
+  { label: "Find the code", icon: Search },
+  { label: "Fix it by hand", icon: Wrench },
   { label: "Run tests", icon: PlayCircle },
   { label: "Push", icon: Upload },
   { label: "Wait for CI", icon: Clock },
-  { label: "Return to GitHub", icon: CornerDownLeft },
+  { label: "Back to GitHub", icon: CornerDownLeft },
   { label: "Resolve thread", icon: CheckCheck },
 ];
 
 const WITH_RESOLVR: Step[] = [
-  { label: "Review", icon: MessageSquareText },
+  { label: "GitHub PR Review", icon: GitPullRequest },
+  { label: "Coding Agent", icon: Bot },
   { label: "Resolvr", icon: Workflow },
-  { label: "Agent + local context", icon: Bot },
-  { label: "Validation", icon: PlayCircle },
-  { label: "Approval", icon: ShieldCheck },
-  { label: "Push", icon: Upload },
-  { label: "Resolved", icon: CheckCircle2 },
+  { label: "Local Fix", icon: Wrench },
+  { label: "Tests / CI", icon: FlaskConical },
+  { label: "Human Approval", icon: UserCheck },
+  { label: "Commit & Push", icon: GitCommitHorizontal },
+  { label: "Review Resolved", icon: CheckCircle2 },
 ];
 
 function Timeline({
@@ -95,14 +97,14 @@ export default function Problem() {
       <div className="mx-auto max-w-6xl">
         <SectionHeading
           eyebrow="The problem"
-          title="Code review shouldn't mean context switching."
-          sub="Every review comment today costs a context switch: out of GitHub, into the IDE, back through CI, and back to GitHub again. Resolvr collapses that loop."
+          title="A review comment isn't a fix — someone still has to make it one."
+          sub="GitHub Copilot can review your pull request and leave comments — but turning those comments into verified code changes, tests, and resolved threads still requires a workflow. Someone has to open the editor, read every thread, fix the code, and resolve each conversation by hand."
         />
 
         <div className="mt-14 grid grid-cols-1 gap-8 lg:grid-cols-[1fr_auto_1fr] lg:items-start lg:gap-6">
           <Reveal>
             <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.16em] text-text-tertiary">
-              Traditional — 11 steps
+              Without Resolvr
             </p>
             <Timeline steps={TRADITIONAL} tone="muted" />
           </Reveal>
@@ -115,7 +117,7 @@ export default function Problem() {
 
           <Reveal delay={0.1}>
             <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.16em] text-accent-coral">
-              With Resolvr — 7 steps
+              With Resolvr
             </p>
             <Timeline steps={WITH_RESOLVR} tone="accent" />
           </Reveal>

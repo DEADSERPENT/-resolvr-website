@@ -1,4 +1,4 @@
-import { AppWindow, Laptop, TerminalSquare, type LucideIcon } from "lucide-react";
+import { AppWindow, Laptop, TerminalSquare, Container, type LucideIcon } from "lucide-react";
 import Reveal from "@/components/shared/Reveal";
 import SectionHeading from "@/components/shared/SectionHeading";
 
@@ -58,12 +58,27 @@ export default function InstallationSection() {
           ))}
         </div>
 
-        <Reveal delay={0.2} className="mt-10 flex justify-center">
+        <Reveal delay={0.2} className="mt-10 flex flex-col items-center gap-4">
+          <div className="flex flex-wrap items-center justify-center gap-3.5">
+            <a
+              href="https://github.com/DEADSERPENT/resolvr/releases/latest"
+              className="skeuo-btn inline-flex items-center rounded-2xl px-6 py-3.5 text-[14.5px] font-semibold"
+            >
+              Download for your platform
+            </a>
+            <a
+              href="/docs/installation"
+              className="glass inline-flex items-center rounded-2xl px-6 py-3.5 text-[14.5px] font-medium text-text-primary transition-colors hover:border-glass-border-strong"
+            >
+              Full installation guide
+            </a>
+          </div>
           <a
-            href="/docs/installation"
-            className="skeuo-btn inline-flex items-center rounded-2xl px-6 py-3.5 text-[14.5px] font-semibold"
+            href="https://github.com/DEADSERPENT/resolvr/tree/main/docker"
+            className="flex items-center gap-1.5 font-mono text-[11.5px] text-text-tertiary transition-colors hover:text-accent-sage"
           >
-            View installation docs
+            <Container size={13} />
+            Prefer containers? Self-host via Docker.
           </a>
         </Reveal>
       </div>

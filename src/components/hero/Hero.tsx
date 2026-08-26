@@ -40,17 +40,16 @@ export default function Hero() {
             className="glass mb-6 inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 font-mono text-[11px] uppercase tracking-[0.16em] text-accent-sage"
           >
             <span className="h-1.5 w-1.5 rounded-full bg-accent-sage" />
-            MCP-native · GitHub-connected
+            Built for GitHub Copilot · MCP-native
           </motion.span>
 
           <motion.h1
             variants={item}
-            className="font-display text-[13vw] leading-[0.96] font-extrabold tracking-tight text-text-primary sm:text-6xl lg:text-[4.4rem]"
+            className="font-display text-[11.5vw] leading-[1.02] font-extrabold tracking-tight text-text-primary sm:text-5xl lg:text-[3.6rem]"
           >
-            Resolve code.
-            <br />
+            Turn GitHub PR reviews into{" "}
             <span className="bg-gradient-to-r from-accent-coral via-accent-sand to-accent-sage bg-clip-text text-transparent">
-              Not review debt.
+              verified, approved fixes.
             </span>
           </motion.h1>
 
@@ -58,9 +57,10 @@ export default function Hero() {
             variants={item}
             className="mt-6 max-w-lg text-[16.5px] leading-relaxed text-text-secondary sm:text-lg"
           >
-            Resolvr connects GitHub review feedback, your local workspace, CI,
-            and AI coding agents into a controlled workflow that turns review
-            comments into verified fixes.
+            Resolvr is the bridge between a GitHub PR review and the coding
+            agent that fixes it — handing your agent the review threads and
+            CI status, then committing, pushing, and resolving them once you
+            explicitly approve.
           </motion.p>
 
           <motion.div
@@ -68,7 +68,7 @@ export default function Hero() {
             className="mt-9 flex flex-wrap items-center gap-3.5"
           >
             <a
-              href="#install"
+              href="https://github.com/DEADSERPENT/resolvr/releases/latest"
               className="skeuo-btn inline-flex items-center gap-2 rounded-2xl px-6 py-3.5 text-[14.5px] font-semibold"
             >
               Get Resolvr
@@ -93,7 +93,7 @@ export default function Hero() {
             variants={item}
             className="mt-8 font-mono text-[11.5px] tracking-tight text-text-tertiary"
           >
-            No autonomous merges. Every write requires human approval.
+            Runs no LLM of its own. Every write is approval-gated.
           </motion.p>
         </div>
 

@@ -64,7 +64,7 @@ const TOPICS: Topic[] = [
 
 export default function DocsPage() {
   return (
-    <main className="flex flex-1 flex-col pt-20">
+    <main id="main" className="flex flex-1 flex-col pt-20">
       <section className="relative w-full px-4 py-24 sm:px-6 sm:py-32">
         <div className="mx-auto max-w-4xl">
           <SectionHeading

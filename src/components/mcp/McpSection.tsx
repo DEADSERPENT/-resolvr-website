@@ -1,92 +1,78 @@
-import { Bot, Workflow, FolderGit2, FlaskConical, ArrowDown } from "lucide-react";
+import { Bot, Code2, Blocks, Sparkles, type LucideIcon } from "lucide-react";
 import Reveal from "@/components/shared/Reveal";
 import SectionHeading from "@/components/shared/SectionHeading";
-import GithubMark from "@/components/icons/GithubMark";
 
-const SPOKES = [
-  { label: "GitHub", icon: GithubMark },
-  { label: "Local workspace", icon: FolderGit2 },
-  { label: "CI", icon: FlaskConical },
-];
-
-const AGENT_CARDS = [
+const AGENTS: { name: string; desc: string; icon: LucideIcon }[] = [
   {
-    name: "Claude Code",
-    desc: "Connects to Resolvr's MCP server to pull PR context and drive the resolution loop from the CLI.",
+    name: "VS Code",
+    desc: "Copilot Agent Mode connects over MCP.",
+    icon: Code2,
   },
   {
-    name: "GitHub Copilot",
-    desc: "Uses the same MCP surface to read workspace and PR context before proposing a fix.",
+    name: "JetBrains",
+    desc: "Copilot Agent Mode connects the same way.",
+    icon: Blocks,
+  },
+  {
+    name: "Claude Code",
+    desc: "Add Resolvr as an MCP server.",
+    icon: Sparkles,
   },
 ];
 
 export default function McpSection() {
   return (
-    <section id="mcp" className="relative w-full px-4 py-24 sm:px-6 sm:py-32">
+    <section id="integrations" className="relative w-full px-4 py-24 sm:px-6 sm:py-32">
       <div className="mx-auto max-w-5xl">
         <SectionHeading
-          eyebrow="Protocol"
-          title="Built around MCP."
-          sub="Resolvr exposes its workflow through a Model Context Protocol server, so a coding agent can interact with repository and PR resolution capabilities directly."
+          eyebrow="Integrations"
+          title="Works with the coding agent you already use."
+          sub="Resolvr's primary use case is resolving GitHub Copilot PR reviews. Every agent below connects to Resolvr the same way, over the Model Context Protocol."
           align="center"
         />
 
         <Reveal delay={0.1} className="mt-14">
-          <div className="glass-strong flex flex-col items-center gap-2 rounded-3xl p-8 sm:p-12">
-            <span className="clay flex h-11 w-11 items-center justify-center !rounded-xl text-text-primary">
-              <Bot size={18} />
+          <div className="glass-strong flex flex-col items-center gap-4 rounded-3xl p-8 text-center sm:p-10">
+            <span className="clay flex h-14 w-14 items-center justify-center !rounded-2xl text-accent-coral">
+              <Bot size={24} />
             </span>
-            <span className="mt-2 font-mono text-[12px] text-text-secondary">
-              Claude Code
+            <span className="glass rounded-full px-3 py-1 font-mono text-[10.5px] uppercase tracking-[0.14em] text-accent-sage">
+              Primary integration
             </span>
-            <ArrowDown size={16} className="my-2 text-text-tertiary" />
-            <span className="font-mono text-[10.5px] uppercase tracking-[0.16em] text-accent-coral">
-              MCP
-            </span>
-            <ArrowDown size={16} className="my-2 text-text-tertiary" />
-            <span className="clay flex h-12 w-12 items-center justify-center !rounded-xl text-accent-coral">
-              <Workflow size={20} />
-            </span>
-            <span className="mt-2 font-mono text-[12px] font-semibold text-text-primary">
-              Resolvr
-            </span>
-
-            <div className="mt-8 grid w-full grid-cols-3 gap-4 border-t border-glass-border pt-8">
-              {SPOKES.map((spoke) => (
-                <div
-                  key={spoke.label}
-                  className="flex flex-col items-center gap-2"
-                >
-                  <span className="clay flex h-9 w-9 items-center justify-center !rounded-lg text-accent-sage">
-                    <spoke.icon size={15} />
-                  </span>
-                  <span className="text-center font-mono text-[10.5px] text-text-tertiary">
-                    {spoke.label}
-                  </span>
-                </div>
-              ))}
-            </div>
+            <h3 className="font-display text-xl font-bold text-text-primary">
+              GitHub Copilot
+            </h3>
+            <p className="max-w-md text-[14px] leading-relaxed text-text-secondary">
+              Copilot can review your pull request and leave comments.
+              Resolvr is what turns those comments into a verified,
+              approved fix.
+            </p>
           </div>
         </Reveal>
 
-        <p className="mx-auto mt-6 max-w-md text-center font-mono text-[11.5px] text-text-tertiary">
-          Connect your coding agent to Resolvr through MCP.
-        </p>
-
-        <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2">
-          {AGENT_CARDS.map((card, i) => (
-            <Reveal key={card.name} delay={i * 0.08}>
-              <div className="glass h-full rounded-2xl p-6">
-                <h3 className="font-display text-lg font-bold text-text-primary">
-                  {card.name}
-                </h3>
-                <p className="mt-2 text-[13.5px] leading-relaxed text-text-secondary">
-                  {card.desc}
+        <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-3">
+          {AGENTS.map((agent, i) => (
+            <Reveal key={agent.name} delay={0.06 + i * 0.06}>
+              <div className="glass flex h-full flex-col items-center gap-2 rounded-2xl p-6 text-center">
+                <span className="clay flex h-10 w-10 items-center justify-center !rounded-lg text-accent-sage">
+                  <agent.icon size={17} />
+                </span>
+                <h4 className="mt-1 text-[14.5px] font-semibold text-text-primary">
+                  {agent.name}
+                </h4>
+                <p className="text-[12.5px] leading-relaxed text-text-secondary">
+                  {agent.desc}
                 </p>
               </div>
             </Reveal>
           ))}
         </div>
+
+        <Reveal delay={0.3} className="mt-8 flex justify-center">
+          <p className="glass inline-flex items-center gap-2 rounded-full px-4 py-2 font-mono text-[11.5px] text-text-secondary">
+            One MCP endpoint. Same connection for every agent.
+          </p>
+        </Reveal>
       </div>
     </section>
   );

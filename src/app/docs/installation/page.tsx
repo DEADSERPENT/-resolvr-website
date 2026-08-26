@@ -147,7 +147,7 @@ function Section({ children }: { children: ReactNode }) {
 
 export default function InstallationGuidePage() {
   return (
-    <main className="flex flex-1 flex-col pt-20">
+    <main id="main" className="flex flex-1 flex-col pt-20">
       <section className="relative w-full px-4 py-20 sm:px-6">
         <div className="mx-auto max-w-6xl">
           <Reveal>
